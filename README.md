@@ -1,7 +1,7 @@
 # Photoshop
 ### opencv를 활용한 포토샵 프로그램 구현
 
-1. python
+1. Python
 2. PyQt5를 이용한 ui 구현
 
 ### 기능
