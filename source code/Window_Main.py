@@ -44,14 +44,14 @@ class MainWindow(QMainWindow, form_class):
         self.btn_save.clicked.connect(self.save_file)
         
     def open_file(self):
-        new_img = QFileDialog.getOpenFileName       # QFileDialog - 윈도우에서 탐색기를 불러오는 Class 
-        self.file, _ = new_img(self, 'Open', './img') # './img' 경로 지정 -> 실행 시 ./img에 해당하는 탐색기를 불러온다
-        self.showImg()                                 # showImg() 불러온 기본 이미지를 보여주는 함수 
-        self.loadImage()                                # loadImage() 불러온 편집할 이미지를 보여주는 함수 
+        new_img = QFileDialog.getOpenFileName       
+        self.file, _ = new_img(self, 'Open', './img')
+        self.showImg()                                 
+        self.loadImage()                                
     def save_file(self):
-        save_img = cv2.cvtColor(self.rightimg, cv2.COLOR_BGR2RGB)       # 사진 저장 시 원본 색 유지를 위한 cvtColor() 사용 
-        self.savefile, _ = QFileDialog.getSaveFileName(self, 'save', './img', '파일(*.jpg;*.jpeg;*.png;*)')     #QFileDialog - 윈도우에서 탐색기를 불러오는 Class로 '/img'지정한 경로에 '파일(*.jpg;*.jpeg;*.png;*)'로 파일 저장
-        cv2.imwrite(self.savefile, save_img)                        # imwrite()를 통해 편집한 이미지 저장
+        save_img = cv2.cvtColor(self.rightimg, cv2.COLOR_BGR2RGB)       
+        self.savefile, _ = QFileDialog.getSaveFileName(self, 'save', './img', '파일(*.jpg;*.jpeg;*.png;*)')    
+        cv2.imwrite(self.savefile, save_img)                       
         
     def loadImage(self):                                        # loadImage() 불러온 편집할 이미지를 보여주는 함수 
         loadimg = cv2.imread(self.file)                         # 파일탐색기를 통해 불러온 이미지 imread()로 읽기   
