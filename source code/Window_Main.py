@@ -12,7 +12,7 @@ from logo import *
 form_class = uic.loadUiType('source code\main.ui')[0]
 
 class MainWindow(QMainWindow, form_class):
-    def __init__(self):              #self : 클래스 내 호출한 인스턴스 & __init__ 클래스를 통해 인스턴스 생성 시 항상 실행되는 부분
+    def __init__(self):              
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle('Photoshop')
@@ -116,45 +116,45 @@ class MainWindow(QMainWindow, form_class):
                 gray = cv2.cvtColor(loadimg, cv2.COLOR_BGR2GRAY)            
                 editimg = cv2.cvtColor(gray, cv2.COLOR_GRAY2RGB)            
                 self.rightimg = editimg
-                self.updateImg()                                            # updateImg()로 편집한 이미지 출력
-            if self.btn_original.isChecked() == True:                   # original 버튼이 활성화되었을 경우
-                self.oriImg(self)                                       # 원본 이미지로 돌려주는 함수 orgImg() 호출 및 출력
+                self.updateImg()                                            
+            if self.btn_original.isChecked() == True:                 
+                self.oriImg(self)                                       
         except:
             print("=")
     def contour(self):
-        cont_img = cv2.cvtColor(self.rightimg,cv2.COLOR_BGR2GRAY)           # cvtColor()함수를 통해 grayscale로 변환
-        cont_img = cv2.resize(cont_img,(421,481))                           # 이미지 크기 조정
-        edge = cv2.Canny(cont_img, 150,200)                                 # Canny()를 이용한 에지 검출
+        cont_img = cv2.cvtColor(self.rightimg,cv2.COLOR_BGR2GRAY)           
+        cont_img = cv2.resize(cont_img,(421,481))                           
+        edge = cv2.Canny(cont_img, 150,200)                                 
         cv2.imshow('img',edge)
 
-    def rotateImg(self):                                                # 시계 방향으로 회전하는 rotateImg() 함수
+    def rotateImg(self):                                                
         rot_img = self.rightimg                                             
-        rot_img = cv2.rotate(rot_img, cv2.ROTATE_90_CLOCKWISE)          # rotate()함수를 통해 시계방향으로  90도씩 회전
+        rot_img = cv2.rotate(rot_img, cv2.ROTATE_90_CLOCKWISE)          
         self.rightimg = rot_img
-        self.updateImg()                                                # updateImg()로 편집한 이미지 출력
-    def flipImg(self):                                                  # 이미지대칭 변환하는 flipImg() 함수
-        flip_img = self.rightimg                                        # 대칭 변환할 이미지 선언
-        flip_img = cv2.flip(flip_img, 0)                                # cv2.flip()함수와 '0' 인자를 이용하여 이미지 좌우 대칭
+        self.updateImg()                                                
+    def flipImg(self):                                                  
+        flip_img = self.rightimg                                       
+        flip_img = cv2.flip(flip_img, 0)
         self.rightimg = flip_img                                        
         self.updateImg()
-    def flipImg2(self):                                                 # 이미지대칭 변환하는 flipImg2() 함수
-        flip_img = self.rightimg                                        # 대칭 변환할 이미지 선언
-        flip_img = cv2.flip(flip_img, 1)                                # cv2.flip()함수와 '1' 인자를 이용하여 이미지 상하 대칭
+    def flipImg2(self):                                                 
+        flip_img = self.rightimg                                        
+        flip_img = cv2.flip(flip_img, 1)                               
         self.rightimg = flip_img
         self.updateImg()
-    def oriImg(self):                                                   # 원본 이미지를 출력해주는 함수 oriImg()
-        self.rightimg = self.orgImg.copy()                              # 편집했던 이미지 원본 이미지 copy()
+    def oriImg(self):                                                  
+        self.rightimg = self.orgImg.copy()                           
         self.updateImg()   
-    def cutImg(self):                                                   # 이미지 자르기 함수 cutImg()
-        rectangle(self)                                                 # cut_rectangle 함수 첨부 및 이용
+    def cutImg(self):                                                 
+        rectangle(self)                                                 
         
-    def logoImg(self):                                                  # 로고와 함께 저장하는 함수 logoImg()
+    def logoImg(self):                                               
         addlogo(self)                                       
    
-if __name__ == "__main__":                                              # 인터프리터에서 직접 실행했을 경우에만 if문 내 코드 실행
+if __name__ == "__main__":                                            
     import sys
-    app = QApplication([])                                              # 응용 프로그램을 작동시키기 위한 QApplication()
+    app = QApplication([])                                             
     ex = MainWindow()
-    sys.exit(app.exec_())                                               # app  객체를 실행시키고 종료시킨다
+    sys.exit(app.exec_())                                              
 
 
